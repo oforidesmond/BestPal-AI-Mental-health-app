@@ -6,7 +6,6 @@ export default function Chat() {
   return (
     <View>
       <ChatGPT/>
-      <Text>fsfsf</Text>
     </View>
   )
 }

@@ -4,10 +4,11 @@ import { useUser } from '@clerk/clerk-expo';
 import Colors from '../assets/Shared/Colors';
 import axios from 'axios';
 
+//Trying out if API calls works
 const ChatGPT = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [data, setData] = useState([]);
-  const apiKey = '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';
+  const apiKey = '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'; // Test Key
   const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
   const [textInput, setTextInput] = useState('');
 
@@ -60,7 +61,6 @@ const ChatGPT = () => {
       <TouchableOpacity style={styles.button} onPress={handleSend}>
         <Text style={styles.buttonText}>Send</Text>
       </TouchableOpacity> */}
-           <Text>jadjjjfsjfjsfjj</Text>
 
     </View>
   );
