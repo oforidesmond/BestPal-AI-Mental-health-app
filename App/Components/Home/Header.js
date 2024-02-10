@@ -82,7 +82,7 @@ export default function Header() {
                 <Text style={styles.buttonText}>Mentors</Text>
               </TouchableOpacity>
               
-              <TouchableOpacity onPress={()=>navigation.navigate('')} style={styles.modalButton}>
+              <TouchableOpacity onPress={()=>navigation.navigate('mood-tracking')} style={styles.modalButton}>
                 <Ionicons name="notifications-outline" size={24} color="black" />
                 <Text style={styles.buttonText}>Notification</Text>
               </TouchableOpacity>

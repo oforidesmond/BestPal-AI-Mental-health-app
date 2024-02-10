@@ -7,6 +7,9 @@ import BookAppointment from '../Screens/BookAppointment';
 import ExersizeDetailsScreen from '../Screens/ExersizeDetailsScreen';
 import MentorDetails from '../Screens/MentorDetails';
 import PremiumMentorsListScreen from '../Screens/PremiumMentorsListScreen';
+import MoodTracking from '../Screens/MoodTracking';
+
+
 
 const Stack=createStackNavigator();
 
@@ -21,6 +24,8 @@ export default function Homenavigation() {
       <Stack.Screen name='book-appointment' component={BookAppointment}/>
 
       <Stack.Screen name='exersize-details' component={ExersizeDetailsScreen}/>
+
+      <Stack.Screen name='mood-tracking' component={MoodTracking}/>
 
     </Stack.Navigator>
 
