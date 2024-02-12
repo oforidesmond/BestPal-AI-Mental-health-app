@@ -34,6 +34,10 @@ const createAppointment=(data)=>AxioInstance.post(
   "/appointments",data
 );
 
+const trackMood=(data)=>AxioInstance.post(
+  "/moods",data
+);
+
 const getAllHospital=()=>AxioInstance.get("hospitals?populate=*");
 
 const getUserAppointments=(email)=> AxioInstance.get("appointments?filters[email][$eq]="+email+"&populate=*");
@@ -51,5 +55,6 @@ export default {
   createAppointment,
   getAllHospital,
   getUserAppointments,
-  getExersizeDescription
+  getExersizeDescription,
+  trackMood
 };

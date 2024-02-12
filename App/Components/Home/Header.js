@@ -6,6 +6,7 @@ import headerLogo from '../../../assets/images/headerLogo.png'
 // import Colors from '../../../assets/Shared/Colors';
 import { useNavigation } from '@react-navigation/native';
 import Notification from "./Notification";
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 export default function Header() {
@@ -83,8 +84,8 @@ export default function Header() {
               </TouchableOpacity>
               
               <TouchableOpacity onPress={()=>navigation.navigate('mood-tracking')} style={styles.modalButton}>
-                <Ionicons name="notifications-outline" size={24} color="black" />
-                <Text style={styles.buttonText}>Notification</Text>
+                <MaterialIcons name="mood" size={24} color="black" />
+                <Text style={styles.buttonText}>Mood Tracking</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={()=>navigation.navigate('')} style={styles.modalButton}>
                 <Ionicons name="settings-outline" size={24} color="black" />

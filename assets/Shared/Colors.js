@@ -4,4 +4,5 @@ export default {
   SECONDARY: "#dbeafe",
   LIGHT_GRAY: "#e6e8eb",
   GRAY: "#a6a4a4",
+  Green: "#00994c"
 };
