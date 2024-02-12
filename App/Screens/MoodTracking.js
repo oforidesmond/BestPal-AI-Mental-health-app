@@ -7,9 +7,11 @@ import {
   TextInput,
   ActivityIndicator,
   Image,
+  Modal,
+  FlatList,
 } from "react-native";
 import moment from "moment";
-import { FlatList } from "react-native-gesture-handler";
+// import { FlatList } from "react-native-gesture-handler";
 // import PageHeader from "../Shared/PageHeader";
 import { useUser } from "@clerk/clerk-expo";
 import Toast from 'react-native-root-toast';
@@ -22,10 +24,33 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import HorizontalLine from "../Components/Shared/HorizontalLine";
 import { MaterialIcons } from '@expo/vector-icons';
 import PageHeader from "../Components/Shared/PageHeader";
-
+//import ShareMood from "../Components/BookAppointment/ShareMood";
+import HospitalDoctorTab from '../Components/MentorsScreen/HospitalDoctorTab'
+import HospitalListBig from '../Components/MentorsScreen/HospitalListBig';
 
 export default function MoodTracking() {
   const { isLoaded, isSignedIn, user } = useUser();
+
+  const [hospitalList, setHospitalList]=useState([]);
+  const [activeTab, setActiveTab]=useState('Hospital');
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+
+  useEffect(()=>{
+    getAllHospital();
+
+  },[])
+
+  const getAllHospital=()=>{
+    GlobalApi.getAllHospital().then(resp=>{
+      setHospitalList(resp.data.data);
+    })
+  }
 
   const [next7Days, setNext7Days] = useState([]);
   const [timeList, setTimeList] = useState([]);
@@ -152,7 +177,6 @@ export default function MoodTracking() {
     <View style={{padding: 20}}>
  <PageHeader title={'Mood Tracking'} />
   <View style={{ marginTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'row', gap: 15 }}>
-    {/* Modified part to display user's image */}
    <View style={{padding: 10}}><Image source={{ uri: user.imageUrl }} style={{ width: 100, height: 100, borderRadius: 99  }} /></View> 
     <View>
       <Text style={{ fontSize: 20, fontFamily: 'appfont-semi', marginBottom: 8 }}>Heya {user.firstName} 👋</Text>
@@ -343,6 +367,7 @@ paddingVertical:16,
         )}
       </TouchableOpacity>
       <TouchableOpacity
+      onPress={isLoading ? null : toggleModal}
         style={{
           padding: 13,
           backgroundColor: Colors.Green,
@@ -371,6 +396,25 @@ paddingVertical:16,
           </Text>
         )}
       </TouchableOpacity>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={toggleModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Mentors</Text>
+            <HospitalListBig hospitalList={hospitalList} />
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={toggleModal}
+            >
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -417,4 +461,33 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "appfont-semi",
     fontSize: 17,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: Colors.white,
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  closeButton: {
+    marginTop: 20,
+    backgroundColor: Colors.PRIMARY,
+    padding: 10,
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: Colors.white,
+    textAlign: 'center',
+    fontFamily: 'appfont-semi',
+    fontSize: 16,
   },});

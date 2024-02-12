@@ -1,14 +1,20 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import PageHeader from "../Components/Shared/PageHeader";
 import Colors from "../../assets/Shared/Colors";
 import MentorInfo from "../Components/MentorDetail/MentorInfo";
+import Toast from 'react-native-root-toast';
+
 
 export default function MentorDetails() {
   const [mentor, setMentor] = useState();
   const param = useRoute().params;
   const navigation=useNavigation();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+
 
   useEffect(() => {
     setMentor(param.mentor);
@@ -54,6 +60,45 @@ export default function MentorDetails() {
         }}>Book Mentor</Text>
 
       </TouchableOpacity>
+      <TouchableOpacity
+  onPress={() => {
+    Toast.show('Sent successfully!', {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0,
+    });
+  }}
+  style={{
+    padding: 13,
+    backgroundColor: Colors.Green,
+    margin: 10,
+    borderRadius: 99,
+    left: 0,
+    right: 0,
+    marginBottom: 10,
+    zIndex: 20,
+    position: "relative",
+  }}
+>
+  {isLoading ? (
+    <ActivityIndicator size="small" color={Colors.white} />
+  ) : (
+    <Text
+      style={{
+        color: Colors.white,
+        textAlign: "center",
+        fontFamily: "appfont-semi",
+        fontSize: 17,
+      }}
+    >
+      Share mood history
+    </Text>
+  )}
+</TouchableOpacity>
+      
     </View>
   );
 }
